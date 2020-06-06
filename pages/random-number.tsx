@@ -18,11 +18,11 @@ export default function RandomNumberPage() {
   }, []);
 
   const handleGenerateNumber = useCallback((e) => {
-    const range = maxValue - minValue;
+    const range = Number(maxValue) - Number(minValue);
     if (range < 0) {
       return;
     }
-    setRandomNumber(Math.round(Math.random() * range + minValue));
+    setRandomNumber((Math.floor(Math.random() * range + Number(minValue))).toString());
   }, [minValue, maxValue])
 
   return (
@@ -40,7 +40,7 @@ export default function RandomNumberPage() {
 
 const EmbedLayout = styled.div`
   padding: 32px;
-  background: ${colors.R08};
+  background: ${colors.white};
 `;
 
 const Row = styled.div`
