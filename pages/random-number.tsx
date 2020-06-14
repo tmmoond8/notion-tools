@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useState, useCallback } from "react";
-import { TextFiled, Content, Button } from "notion-ui";
+import { TextFiled, Content, Button, Layout } from "notion-ui";
 import { useRouter } from "next/router";
 
 export default function RandomNumberPage() {
@@ -37,25 +37,32 @@ export default function RandomNumberPage() {
   );
 
   return (
-    <EmbedLayout>
-      <Row>
-        <TextFiled id="min" value={minValue} onChange={handleChangeMin} />
-        <Content.Text as="P">to</Content.Text>
-        <TextFiled id="max" value={maxValue} onChange={handleChangeMax} />
-        <Button.Base buttonType="Primary" onClick={handleGenerateNumber}>
-          Generate
-        </Button.Base>
-      </Row>
-      <RandomNumber as="H3" marginTop={16}>
-        {randomNumber}
-      </RandomNumber>
-    </EmbedLayout>
+    <RandomNumberLayout>
+      <ContentWrapper>
+        <Row>
+          <TextFiled id="min" value={minValue} onChange={handleChangeMin} />
+          <Content.Text as="P">to</Content.Text>
+          <TextFiled id="max" value={maxValue} onChange={handleChangeMax} />
+          <Button buttonType="Primary" onClick={handleGenerateNumber}>
+            Generate
+          </Button>
+        </Row>
+        <RandomNumber as="H3" marginTop={16}>
+          {randomNumber}
+        </RandomNumber>
+      </ContentWrapper>
+    </RandomNumberLayout>
   );
 }
 
-const EmbedLayout = styled.div`
-  padding: 32px;
-  background: white;
+const RandomNumberLayout = styled(Layout.Embed)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ContentWrapper = styled.div`
+  width: 100%;
 `;
 
 const Row = styled.div`
