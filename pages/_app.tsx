@@ -1,17 +1,15 @@
-import App from 'next/app';
-import GlobalStyles from '../styles/globalStyles';
+import App from "next/app";
+import GlobalStyles from "../styles/globalStyles";
 
 class NotionToolsApp extends App {
-
-
   public render() {
     const { Component, pageProps } = this.props;
     return (
       <>
-        <GlobalStyles/>
+        <GlobalStyles />
         <Component {...pageProps} />
       </>
-    )
+    );
   }
 }
 
