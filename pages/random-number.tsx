@@ -1,13 +1,19 @@
-import styled from '@emotion/styled';
-import { useState, useCallback } from 'react';
-import { TextFiled, Content, Button, colors } from 'notion-ui';
-import { useRouter } from 'next/router';
+import styled from "@emotion/styled";
+import { useState, useCallback } from "react";
+import { TextFiled, Content, Button } from "notion-ui";
+import { useRouter } from "next/router";
 
 export default function RandomNumberPage() {
-  const { query: { min = '0', max = '100' } } = useRouter();
-  const [minValue, setMinValue ] = useState(typeof min === 'string' ? min : min.pop());
-  const [maxValue, setMaxValue ] = useState(typeof max === 'string' ? max : max.pop());
-  const [randomNumber, setRandomNumber ] = useState('ㅤ');
+  const {
+    query: { min = "0", max = "100" },
+  } = useRouter();
+  const [minValue, setMinValue] = useState(
+    typeof min === "string" ? min : min.pop()
+  );
+  const [maxValue, setMaxValue] = useState(
+    typeof max === "string" ? max : max.pop()
+  );
+  const [randomNumber, setRandomNumber] = useState("ㅤ");
 
   const handleChangeMin = useCallback((e) => {
     setMinValue(e.target.value);
@@ -17,30 +23,39 @@ export default function RandomNumberPage() {
     setMaxValue(e.target.value);
   }, []);
 
-  const handleGenerateNumber = useCallback((e) => {
-    const range = Number(maxValue) - Number(minValue);
-    if (range < 0) {
-      return;
-    }
-    setRandomNumber((Math.floor(Math.random() * range + Number(minValue))).toString());
-  }, [minValue, maxValue])
+  const handleGenerateNumber = useCallback(
+    (e) => {
+      const range = Number(maxValue) - Number(minValue);
+      if (range < 0) {
+        return;
+      }
+      setRandomNumber(
+        Math.floor(Math.random() * range + Number(minValue)).toString()
+      );
+    },
+    [minValue, maxValue]
+  );
 
   return (
     <EmbedLayout>
       <Row>
-        <TextFiled id="min" value={minValue} onChange={handleChangeMin}/>
+        <TextFiled id="min" value={minValue} onChange={handleChangeMin} />
         <Content.Text as="P">to</Content.Text>
-        <TextFiled id="max" value={maxValue} onChange={handleChangeMax}/>
-        <Button buttonType="Primary" onClick={handleGenerateNumber}>Generate</Button>
+        <TextFiled id="max" value={maxValue} onChange={handleChangeMax} />
+        <Button.Base buttonType="Primary" onClick={handleGenerateNumber}>
+          Generate
+        </Button.Base>
       </Row>
-      <RandomNumber as="H3" marginTop={16}>{randomNumber}</RandomNumber>
+      <RandomNumber as="H3" marginTop={16}>
+        {randomNumber}
+      </RandomNumber>
     </EmbedLayout>
-  )
+  );
 }
 
 const EmbedLayout = styled.div`
   padding: 32px;
-  background: ${colors.white};
+  background: white;
 `;
 
 const Row = styled.div`

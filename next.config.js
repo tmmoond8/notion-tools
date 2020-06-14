@@ -1,18 +1,18 @@
 module.exports = {
-  webpack: config => {
+  webpack: (config) => {
     config.module.rules.push({
       test: /.(png|jpg)$/,
       use: [
         {
-          loader: 'file-loader',
+          loader: "file-loader",
           options: {
-            name: '[path][name].[ext]?[hash]',
+            name: "[path][name].[ext]?[hash]",
             emitFile: false,
-            publicPath: '/',
+            publicPath: "/",
           },
         },
       ],
     });
     return config;
-  }
-}
+  },
+};
