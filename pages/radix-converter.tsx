@@ -1,44 +1,51 @@
 import styled from "@emotion/styled";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { TextFiled, Content, Button, Layout, colors } from "notion-ui";
+
+const radixMap = {
+  Binary: 2,
+  Octal: 8,
+  Decimal: 10,
+  Hexa: 16,
+};
 
 export default function RadixConverterPage() {
   const [result, setResult] = useState({
-    "2to8": "",
-    "2to10": "",
-    "2to16": "",
-    "8to2": "",
-    "8to10": "",
-    "8to16": "",
-    "10to2": "",
-    "10to8": "",
-    "10to16": "",
-    "16to2": "",
-    "16to8": "",
-    "16to10": "",
+    BinaryToOctal: "",
+    BinaryToDecimal: "",
+    BinaryToHexa: "",
+    OctalToBinary: "",
+    OctalToDecimal: "",
+    OctalToHexa: "",
+    DecimalToBinary: "",
+    DecimalToOctal: "",
+    DecimalToHexa: "",
+    HexaToBinary: "",
+    HexaToOctal: "",
+    HexaToDecimal: "",
   });
   const [input, setInput] = useState({
-    "2": "",
-    "8": "",
-    "10": "",
-    "16": "",
+    Binary: "",
+    Octal: "",
+    Decimal: "",
+    Hexa: "",
   });
 
   const [errorMessage, setErrorMessage] = useState({
-    "2": "",
-    "8": "",
-    "10": "",
-    "16": "",
+    Binary: "",
+    Octal: "",
+    Decimal: "",
+    Hexa: "",
   });
   const handleChagneInput = useCallback(
     (e) => {
       setErrorMessage({
         ...errorMessage,
-        [e.target.id.split("to")[0]]: "",
+        [e.target.id.split("To")[0]]: "",
       });
       setInput({
         ...input,
-        [e.target.id]: e.target.value,
+        [e.target.id.split("To")[0]]: e.target.value,
       });
     },
     [input]
@@ -46,24 +53,26 @@ export default function RadixConverterPage() {
 
   const handleConvert = useCallback(
     (inputRadix, outputRadix) => {
-      const parseNumber = parseInt(input[inputRadix], inputRadix);
+      const parseNumber = parseInt(input[inputRadix], radixMap[inputRadix]);
       if (Number.isNaN(parseNumber)) {
         setErrorMessage({
           ...errorMessage,
-          [inputRadix]: "올바른 값을 입력해주세요.",
+          [inputRadix]: "invalid input. ",
         });
         return;
       }
       setResult({
         ...result,
-        [`${inputRadix}to${outputRadix}`]: parseNumber.toString(outputRadix),
+        [`${inputRadix}To${outputRadix}`]: parseNumber.toString(
+          radixMap[outputRadix]
+        ),
       });
     },
     [result, input]
   );
 
   const model = Object.keys(result).reduce((accum, key) => {
-    const [inputRadix, outputRadix] = key.split("to");
+    const [inputRadix, outputRadix] = key.split("To");
     if (inputRadix in accum) {
       accum[inputRadix].push(outputRadix);
     } else {
@@ -80,7 +89,7 @@ export default function RadixConverterPage() {
             <Row key={inputRadix}>
               <div>
                 <Row>
-                  <InputLabel as="P">{`${inputRadix}진수`}</InputLabel>
+                  <InputLabel as="P">{`${inputRadix}`}</InputLabel>
                   <TextFiled
                     id={inputRadix}
                     value={input[inputRadix]}
@@ -91,16 +100,16 @@ export default function RadixConverterPage() {
               </div>
               <div>
                 {model[inputRadix].map((outputRadix) => (
-                  <Row key={`${inputRadix}to${outputRadix}`}>
+                  <Row key={`${inputRadix}To${outputRadix}`}>
                     <ConvetButton
                       buttonType="Primary"
                       onClick={() => handleConvert(inputRadix, outputRadix)}
                     >
-                      {`${outputRadix} 진수로`}
+                      {`To ${outputRadix}`}
                     </ConvetButton>
                     <ResultNumber as="P">
                       {``}
-                      {result[`${inputRadix}to${outputRadix}`]}
+                      {result[`${inputRadix}To${outputRadix}`]}
                     </ResultNumber>
                   </Row>
                 ))}
