@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { TextFiled, Content, Button, Layout } from "notion-ui";
 import { useRouter } from "next/router";
 
@@ -7,12 +7,18 @@ export default function RandomNumberPage() {
   const {
     query: { min = "0", max = "100" },
   } = useRouter();
-  const [minValue, setMinValue] = useState(
-    typeof min === "string" ? min : min.pop()
+  const [minValue, setMinValue] = useState<string>(
+    typeof min === "string" ? min : min[0]
   );
-  const [maxValue, setMaxValue] = useState(
-    typeof max === "string" ? max : max.pop()
+  const [maxValue, setMaxValue] = useState<string>(
+    typeof max === "string" ? max : max[0]
   );
+
+  useEffect(() => {
+    setMinValue(minValue);
+    setMaxValue(maxValue);
+  }, [minValue, maxValue]);
+
   const [randomNumber, setRandomNumber] = useState("ㅤ");
 
   const handleChangeMin = useCallback((e) => {
