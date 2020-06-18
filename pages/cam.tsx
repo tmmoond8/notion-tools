@@ -51,6 +51,11 @@ export default function CamPage() {
   const canvasRef = useRef<HTMLCanvasElement>();
   const videoRef = useRef<HTMLVideoElement>();
 
+  const videoWidth = 1944;
+  const videoHeight = (videoWidth * browserHeight) / browserWidth;
+  const previewWidth = videoWidth / 10;
+  const previewHeight = videoHeight / 10;
+
   /**
    * 카메라의 width height는 가로모드가 기준입니다.
    * 브라우저는 세로모드가 기준이기 때문에 카메라의 값을 반대로 사용하여 계산하였습니다.
@@ -59,8 +64,8 @@ export default function CamPage() {
   const constraints = {
     audio: false,
     video: {
-      height: browserWidth,
-      width: browserHeight,
+      height: videoWidth,
+      width: videoHeight,
       facingMode: { exact: "environment" },
     },
   };
@@ -104,8 +109,8 @@ export default function CamPage() {
         videoHeight,
         0,
         0,
-        videoWidth / 10,
-        videoHeight / 10
+        previewWidth,
+        previewHeight
       );
     }
   }, []);
@@ -119,7 +124,11 @@ export default function CamPage() {
           <TakePhotoButton buttonType="Primary" onClick={handleClickTakePhoto}>
             촬영
           </TakePhotoButton>
-          <Preview ref={canvasRef} />
+          <Preview
+            ref={canvasRef}
+            height={previewHeight}
+            width={previewWidth}
+          />
         </>
       ) : (
         <NotSupport>Not Support Landscape Mode...</NotSupport>
@@ -157,8 +166,8 @@ const Preview = styled.canvas`
   position: fixed;
   bottom: 24px;
   left: 24px;
-  width: 16vw;
-  height: 26vw;
+  width: ${(p) => p.width}px;
+  height: ${(p) => p.height}px;
   background-color: grey;
 `;
 
