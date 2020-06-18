@@ -146,8 +146,12 @@ const Page = styled.div`
   margin: auto;
 `;
 const Video = styled.video`
-  height: 100%;
-  width: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
 `;
 
 const TakePhotoButton = styled(Button)`
