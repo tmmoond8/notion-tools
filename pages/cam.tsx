@@ -53,8 +53,8 @@ export default function CamPage() {
 
   const videoWidth = 1600;
   const videoHeight = (videoWidth * browserHeight) / browserWidth;
-  const previewWidth = browserWidth / 5;
-  const previewHeight = browserHeight / 5;
+  const previewWidth = browserWidth / 2.5;
+  const previewHeight = browserHeight / 2.5;
 
   /**
    * 카메라의 width height는 가로모드가 기준입니다.
@@ -128,8 +128,8 @@ export default function CamPage() {
           </TakePhotoButton>
           <Preview
             ref={canvasRef}
-            height={previewHeight}
-            width={previewWidth}
+            height={previewHeight / 2}
+            width={previewWidth / 2}
           />
         </>
       ) : (
