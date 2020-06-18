@@ -66,34 +66,28 @@ export default function CamPage() {
     video: {
       height: videoWidth,
       width: videoHeight,
-      // facingMode: { exact: "environment" },
+      facingMode: { exact: "environment" },
     },
   };
 
   useEffect(() => {
-    const renderCamera = () => {
-      window.navigator.mediaDevices
-        .getUserMedia(constraints)
-        .then((stream) => {
-          const video = videoRef.current;
-          if (video && "srcObject" in video) {
-            video.srcObject = stream;
-          } else {
-            video.src = window.URL.createObjectURL(stream);
-          }
-          video.onloadedmetadata = function (e) {
-            video.play();
-          };
-        })
-        .catch((err) => {
-          console.log(err.name);
-        });
-    };
-    const timeout = setTimeout(() => {
-      renderCamera();
-    }, 1000);
-    return () => clearTimeout(timeout);
-  }, []);
+    window.navigator.mediaDevices
+      .getUserMedia(constraints)
+      .then((stream) => {
+        const video = videoRef.current;
+        if (video && "srcObject" in video) {
+          video.srcObject = stream;
+        } else {
+          video.src = window.URL.createObjectURL(stream);
+        }
+        video.onloadedmetadata = function (e) {
+          video.play();
+        };
+      })
+      .catch((err) => {
+        console.log(err.name);
+      });
+  }, [browserWidth, browserHeight]);
 
   const handleClickTakePhoto = () => {
     if (canvasRef.current && videoRef.current) {
