@@ -66,7 +66,7 @@ export default function CamPage() {
     video: {
       height: videoWidth,
       width: videoHeight,
-      facingMode: { exact: "environment" },
+      // facingMode: { exact: "environment" },
     },
   };
 
@@ -95,7 +95,7 @@ export default function CamPage() {
     return () => clearTimeout(timeout);
   }, []);
 
-  const handleClickTakePhoto = useCallback(() => {
+  const handleClickTakePhoto = () => {
     if (canvasRef.current && videoRef.current) {
       const ctx = canvasRef.current.getContext("2d");
       const video = videoRef.current;
@@ -113,12 +113,12 @@ export default function CamPage() {
         previewHeight
       );
     }
-  }, []);
+  };
 
   return (
     <Page>
-      {!IsSupport && <NotSupport>Not Support Desktop Browser...</NotSupport>}
-      {IsSupport && isPortrait ? (
+      {/* {!IsSupport && <NotSupport>Not Support Desktop Browser...</NotSupport>} */}
+      {true || (IsSupport && isPortrait) ? (
         <>
           <Video
             ref={videoRef}
@@ -154,7 +154,7 @@ const Page = styled.div`
   margin: auto;
 `;
 const Video = styled.video`
-  position: fixed;
+  position: absolute;
   left: 0;
   right: 0;
   top: 0;
@@ -177,12 +177,13 @@ const TakePhotoButton = styled(Button)`
 `;
 
 const Preview = styled.canvas`
-  position: fixed;
+  position: absolute;
   bottom: 24px;
   left: 24px;
   width: ${(p) => p.width}px;
   height: ${(p) => p.height}px;
   z-index: 100;
+  margin: auto;
 `;
 
 const NotSupport = styled.div`
