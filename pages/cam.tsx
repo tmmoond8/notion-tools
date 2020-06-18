@@ -120,7 +120,15 @@ export default function CamPage() {
       {!IsSupport && <NotSupport>Not Support Desktop Browser...</NotSupport>}
       {IsSupport && isPortrait ? (
         <>
-          <Video ref={videoRef} />
+          <Video
+            ref={videoRef}
+            width={browserWidth}
+            height={browserHeight}
+            autoPlay={true}
+            playsInline={true}
+          >
+            Your browser does not support the video tag.
+          </Video>
           <TakePhotoButton buttonType="Primary" onClick={handleClickTakePhoto}>
             촬영
           </TakePhotoButton>
