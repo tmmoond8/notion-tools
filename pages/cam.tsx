@@ -111,8 +111,8 @@ export default function CamPage() {
 
   return (
     <Page>
-      {/* {!IsSupport && <NotSupport>Not Support Desktop Browser...</NotSupport>} */}
-      {true || (IsSupport && isPortrait) ? (
+      {!IsSupport && <NotSupport>Not Support Desktop Browser...</NotSupport>}
+      {IsSupport && isPortrait ? (
         <>
           <Video
             ref={videoRef}
