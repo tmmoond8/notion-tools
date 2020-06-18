@@ -151,7 +151,7 @@ const Video = styled.video`
   right: 0;
   top: 0;
   bottom: 0;
-  margin: auto;
+  object-fit: contain;
 `;
 
 const TakePhotoButton = styled(Button)`
@@ -167,12 +167,12 @@ const TakePhotoButton = styled(Button)`
 `;
 
 const Preview = styled.canvas`
-  position: fixed;
+  position: absolute;
   bottom: 24px;
   left: 24px;
   width: ${(p) => p.width}px;
   height: ${(p) => p.height}px;
-  background-color: grey;
+  z-index: 100;
 `;
 
 const NotSupport = styled.div`
