@@ -51,10 +51,10 @@ export default function CamPage() {
   const canvasRef = useRef<HTMLCanvasElement>();
   const videoRef = useRef<HTMLVideoElement>();
 
-  const videoWidth = 1944;
+  const videoWidth = 1600;
   const videoHeight = (videoWidth * browserHeight) / browserWidth;
-  const previewWidth = browserWidth / 10;
-  const previewHeight = browserHeight / 10;
+  const previewWidth = browserWidth / 5;
+  const previewHeight = browserHeight / 5;
 
   /**
    * 카메라의 width height는 가로모드가 기준입니다.
