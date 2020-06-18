@@ -159,6 +159,8 @@ const Video = styled.video`
   right: 0;
   top: 0;
   bottom: 0;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 `;
 
@@ -175,7 +177,7 @@ const TakePhotoButton = styled(Button)`
 `;
 
 const Preview = styled.canvas`
-  position: absolute;
+  position: fixed;
   bottom: 24px;
   left: 24px;
   width: ${(p) => p.width}px;
