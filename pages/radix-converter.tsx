@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useState, useCallback } from "react";
-import { TextFiled, Content, Button, Layout, colors } from "notion-ui";
+import { TextField, Content, Button, Layout, colors } from "notion-ui";
 
 const radixMap = {
   Binary: 2,
@@ -90,7 +90,7 @@ export default function RadixConverterPage() {
               <div>
                 <Row>
                   <InputLabel as="P">{`${inputRadix}`}</InputLabel>
-                  <TextFiled
+                  <TextField
                     id={inputRadix}
                     value={input[inputRadix]}
                     onChange={handleChagneInput}
