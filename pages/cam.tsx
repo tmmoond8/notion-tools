@@ -1,51 +1,9 @@
-import { useCallback, useMemo, useEffect, useState, useRef } from "react";
+import { useMemo, useEffect, useState, useRef } from "react";
 import { Button } from "notion-ui";
 import styled from "@emotion/styled";
 import { detect } from "detect-browser";
 
-const useDetectDevice = () => {
-  const [isPortrait, setPortrait] = useState(true);
-  const [browserWidth, setBrowserWidth] = useState(0);
-  const [browserHeight, setBrowserHeight] = useState(0);
-
-  useEffect(() => {
-    const handleOrientation = () => {
-      const beforeOrientation = window.matchMedia("(orientation: portrait)")
-        .matches;
-      setPortrait(!beforeOrientation);
-      setBrowserWidth(window.innerWidth);
-      setBrowserHeight(window.innerHeight);
-    };
-    setPortrait(window.matchMedia("(orientation: portrait)").matches);
-    setBrowserWidth(window.innerWidth);
-    setBrowserHeight(window.innerHeight);
-    window.addEventListener("orientationchange", handleOrientation, true);
-    return () => {
-      window.removeEventListener("orientationchange", handleOrientation);
-    };
-  }, []);
-
-  return {
-    isPortrait,
-    browserWidth,
-    browserHeight,
-  };
-};
-
-const useIsSupport = () => {
-  const { os, name } = detect();
-  const [isSupport, setIsSupport] = useState(true);
-  const isMobile = useMemo(() => {
-    return ["iOS", "Android OS", "BlackBerry OS"].includes(os);
-  }, [os]);
-
-  useEffect(() => {
-    setIsSupport(isMobile && !["safari"].includes(name));
-  }, [os, name]);
-  return isSupport;
-};
-
-export default function CamPage() {
+const CamPage: React.FC = () => {
   const IsSupport = useIsSupport();
   const { isPortrait, browserWidth, browserHeight } = useDetectDevice();
   const canvasRef = useRef<HTMLCanvasElement>();
@@ -139,6 +97,8 @@ export default function CamPage() {
   );
 }
 
+export default CamPage;
+
 const Page = styled.div`
   position: fixed;
   left: 0;
@@ -189,3 +149,46 @@ const NotSupport = styled.div`
   background-color: black;
   color: white;
 `;
+
+
+function useDetectDevice() {
+  const [isPortrait, setPortrait] = useState(true);
+  const [browserWidth, setBrowserWidth] = useState(0);
+  const [browserHeight, setBrowserHeight] = useState(0);
+
+  useEffect(() => {
+    const handleOrientation = () => {
+      const beforeOrientation = window.matchMedia("(orientation: portrait)")
+        .matches;
+      setPortrait(!beforeOrientation);
+      setBrowserWidth(window.innerWidth);
+      setBrowserHeight(window.innerHeight);
+    };
+    setPortrait(window.matchMedia("(orientation: portrait)").matches);
+    setBrowserWidth(window.innerWidth);
+    setBrowserHeight(window.innerHeight);
+    window.addEventListener("orientationchange", handleOrientation, true);
+    return () => {
+      window.removeEventListener("orientationchange", handleOrientation);
+    };
+  }, []);
+
+  return {
+    isPortrait,
+    browserWidth,
+    browserHeight,
+  };
+};
+
+function useIsSupport() {
+  const { os, name } = detect();
+  const [isSupport, setIsSupport] = useState(true);
+  const isMobile = useMemo(() => {
+    return ["iOS", "Android OS", "BlackBerry OS"].includes(os);
+  }, [os]);
+
+  useEffect(() => {
+    setIsSupport(isMobile && !["safari"].includes(name));
+  }, [os, name]);
+  return isSupport;
+};
