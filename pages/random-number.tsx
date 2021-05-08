@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useState, useCallback, useEffect } from "react";
-import { TextFiled, Content, Button, Layout } from "notion-ui";
+import { TextField, Content, Button, Layout } from "notion-ui";
 import { useRouter } from "next/router";
 
 export default function RandomNumberPage() {
@@ -46,9 +46,9 @@ export default function RandomNumberPage() {
     <RandomNumberLayout>
       <ContentWrapper>
         <Row>
-          <TextFiled id="min" value={minValue} onChange={handleChangeMin} />
+          <TextField id="min" value={minValue} onChange={handleChangeMin} />
           <Content.Text as="P">to</Content.Text>
-          <TextFiled id="max" value={maxValue} onChange={handleChangeMax} />
+          <TextField id="max" value={maxValue} onChange={handleChangeMax} />
           <Button buttonType="Primary" onClick={handleGenerateNumber}>
             Generate
           </Button>
