@@ -8,7 +8,9 @@ const CalendarPage: React.FC = () => {
   const { value, onChange, setValue } = useInput('CalendarYear');
 
   React.useEffect(() => {
-    setValue(year.toString());
+    setTimeout(() => {
+      updateValue(year);
+    }, 50)
   }, []);
 
   const updateValue = (value: number | string) => {
@@ -31,7 +33,9 @@ const CalendarPage: React.FC = () => {
       </Head>
       <YearCalendar>
         {new Array(12).fill(null).map((_, i) => (
-          <Calendar.Month year={year}
+          <Calendar.Month
+            key={`${year}${i}`}
+            year={year}
             month={i + 1} />
         ))}
       </YearCalendar>
