@@ -23,7 +23,7 @@ const CalendarPage: React.FC<{ targetYear?: number }> = ({ targetYear }) => {
       <Helmet
         title={`Notion-UI Calendar - ${year}년`}
         description={`Notion-UI Calendar - ${year}년`}
-        image='https://res.cloudinary.com/dgggcrkxq/image/upload/v1620653226/test/seoul-soongrae_dohwwl.jpg'
+        image='https://res.cloudinary.com/dgggcrkxq/image/upload/v1620659980/test/seoul-soongrae_dyjwin.jpg'
         url='https://notion-tools.tammolo.com/calendar'
         keywords='calendar,2021,today'
       />
