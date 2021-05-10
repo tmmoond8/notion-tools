@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Button, Calendar, Layout, colors, IconButton, TextField, useInput } from 'notion-ui';
+import Helmet from '../../components/Helmet';
 
-
-const CalendarPage: React.FC = () => {
-  const [year, setYear] = React.useState(new Date().getFullYear());
+const CalendarPage: React.FC<{ targetYear?: number }> = ({ targetYear }) => {
+  const [year, setYear] = React.useState(targetYear ?? new Date().getFullYear());
   const { value, onChange, setValue } = useInput('CalendarYear');
 
   React.useEffect(() => {
@@ -20,6 +20,13 @@ const CalendarPage: React.FC = () => {
 
   return (
     <CalendarLayout>
+      <Helmet
+        title={`Notion-UI Calendar - ${year}년`}
+        description={`Notion-UI Calendar - ${year}년`}
+        image='https://res.cloudinary.com/dgggcrkxq/image/upload/v1620653226/test/seoul-soongrae_dohwwl.jpg'
+        url='https://notion-tools.tammolo.com/calendar'
+        keywords='calendar,2021,today'
+      />
       <Head>
         <IconButton icon="chevronLeft" onClick={() => updateValue(year - 1)} />
         <IconButton icon="chevronRight" onClick={() => updateValue(year + 1)} />

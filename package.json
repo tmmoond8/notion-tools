@@ -7,7 +7,7 @@
     "dev": "HTTPS=true next",
     "build": "yarn install && next build",
     "export": "next export",
-    "build-export": "next build && next export"
+    "build-export": "yarn build && next export && next-sitemap"
   },
   "dependencies": {
     "@emotion/core": "^10.0.28",
@@ -22,5 +22,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "typescript": "^3.9.3"
+  },
+  "devDependencies": {
+    "next-sitemap": "^1.6.57"
   }
 }
