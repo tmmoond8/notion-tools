@@ -18,7 +18,7 @@
     "detect-browser": "^5.1.1",
     "emotion-reset": "^2.0.7",
     "next": "^9.5.3",
-    "notion-ui": "^0.3.8-h",
+    "notion-ui": "^0.3.8-i",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "typescript": "^3.9.3"
